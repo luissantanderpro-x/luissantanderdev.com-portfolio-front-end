@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-react-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"sass --watch scss/style.scss:css/style.css\" \"live-server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "live-server": "^1.2.2",
+    "sass": "^1.79.4"
+  }
+}
