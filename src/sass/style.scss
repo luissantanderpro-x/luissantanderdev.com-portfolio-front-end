@@ -125,7 +125,7 @@ button:hover {
     background-color: #00cc99;
 }
 
-/* Footer Area */
+/* MARK: - Footer Area */
 .footer {
     margin-top: 20px;
     padding-top: 10px;
@@ -198,11 +198,18 @@ button:hover {
 }
 
 
-// Command Shell 
+// MARK: Command Shell
+
 .command-shell {
     height: 10rem;
     border: 1px solid $color-cyan;
     padding: 10px;
     color: $color-cyan;
     overflow-y: auto;
+    text-align: left;
+}
+
+.command-shell-item {
+    display: grid;
+    grid-template-columns: 25% 75%;
 }

@@ -1,59 +1,48 @@
-import React, {ReactNode, useState, useEffect} from 'react';
+import React, {ReactNode, useState} from 'react';
 
 import nimrod_image from './images/nimrod.jpg'; 
 import tv_static_image from './images/tv_static.jpg';
+
+// MARK: - Components 
+
+import HomeScreen from './components/HomeScreen';
+import ProjectsScreen from './components/ProjectsScreen';
+import SlowPrint from './effects/SlowPrint';
 
 interface ComponentsDictionary {
   [key: string]: ReactNode; 
 }
 
-
-const SlowPrint = (words: string[]) => {
-    const [displayWords, setDisplayedWords] = useState('')
-}
-
-
+// MARK: - App 
 
 const App = () => {
 
-
-
-  const home_screen = () => {
-
-    return (
-      <div className='top-grid-display'>
-        <h1>Home</h1>
-        <h1>Hi there my name is Luis Santander and welcome to my projects portfolio site.</h1>
-      </div>
-    );
-
-  }
-
-
-  const projects_screen = (
-    <div>
-      <h1>Projects</h1>
-      <div className="icon">📁</div>
-    </div>
-
-  );
-
   const menuComponents: ComponentsDictionary = {
-    home: home_screen(),
-    projects: projects_screen
+    home: HomeScreen(),
+    projects: ProjectsScreen(), 
   }
 
 
   const [screen, setScreen] = useState(menuComponents['home']);
-
+  const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>([])
 
   const handleClick = (e: any) => {
-    console.log(e.target.id); 
+    // console.log(e.target.id); 
     setScreen(menuComponents[e.target.id])
+
+    switch (e.target.id) {
+      case 'projects':
+        const projects_shell = (
+          <div className='command-shell-item'>
+            <div>nimrod.ai: </div>
+            <SlowPrint words={['you', 'are']} interval={400}/>
+          </div>
+        );
+        setShellPrompts([...shellPrompts, projects_shell])
+        break; 
+    }
   }
 
-  console.log(screen)
-  // print(currentScreen)
   return (
     <div className="container">
         {/* <!-- Header Section --> */}
@@ -98,19 +87,11 @@ const App = () => {
             <div className="grid-item">
 
                 <div className="command-shell">
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
-                    <p className="command-shell-text">nimrod ai: welcome to luis santanders website</p>
+                    <div className='command-shell-item'>
+                        <div>nimrod.ai: </div>
+                        <SlowPrint words={['hi', 'there', 'my', 'name']} interval={400}/>
+                    </div>
+                    {shellPrompts}
                 </div>
 
             </div>
