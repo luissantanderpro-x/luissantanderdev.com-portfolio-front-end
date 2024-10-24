@@ -7,6 +7,15 @@ $color-cyan: cyan;
 
 // ============================================
 
+// MARK: - Animation Logic
+
+@keyframes fadeOscillator {
+    0% { opacity: 0.2; }    /* Fully visible */
+    50% { opacity: 0.6; }   /* Fully transparent */
+    100% { opacity: 0.2; }  /* Fully visible again */
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -44,7 +53,6 @@ body {
 
     .header-buttons {
         display: flex;
-
     }
 
     button {
@@ -82,6 +90,7 @@ body {
     justify-content: center;
     align-items: center;
     border: 2px solid white; 
+    height: 10rem;
 }
 
 /* Grid Items */
@@ -125,15 +134,7 @@ button:hover {
     background-color: #00cc99;
 }
 
-/* MARK: - Footer Area */
-.footer {
-    margin-top: 20px;
-    padding-top: 10px;
-    text-align: center;
-    font-size: 0.8rem;
-    border-top: 2px solid #00ffcc;
-    color: #00ffcc;
-}
+
 
 // Top Grid Rules 
 
@@ -189,27 +190,48 @@ button:hover {
     animation: fadeOscillator 3s infinite;
 }
 
-// Animation CSS Logic 
-
-@keyframes fadeOscillator {
-    0% { opacity: 0.2; }    /* Fully visible */
-    50% { opacity: 0.6; }   /* Fully transparent */
-    100% { opacity: 0.2; }  /* Fully visible again */
-}
 
 
 // MARK: Command Shell
 
 .command-shell {
-    height: 10rem;
     border: 1px solid $color-cyan;
     padding: 10px;
     color: $color-cyan;
     overflow-y: auto;
     text-align: left;
+    height: 10rem; 
 }
 
 .command-shell-item {
     display: grid;
+    grid-gap: 10px;
     grid-template-columns: 25% 75%;
+}
+
+/* MARK: - Footer Area */
+
+.footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+    border-top: 2px solid #00ffcc;
+    color: #00ffcc;
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+
+    .footer-input {
+        border-style: none;
+        background-color: #000;
+        color: $color-cyan;
+        margin-bottom: 10px;
+
+        &::placeholder {
+            text-align: center;
+            color: white;
+        }
+    }
+
 }

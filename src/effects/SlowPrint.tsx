@@ -3,8 +3,7 @@ import React, {useEffect, useState} from 'react';
 interface SlowPrintProps {
     words: string[];
     interval: number; 
-  }
-
+}; 
 
 // MARK: - Slow Print 
 

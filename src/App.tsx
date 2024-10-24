@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode, useState, useMemo} from 'react';
 
 import nimrod_image from './images/nimrod.jpg'; 
 import tv_static_image from './images/tv_static.jpg';
@@ -7,6 +7,7 @@ import tv_static_image from './images/tv_static.jpg';
 
 import HomeScreen from './components/HomeScreen';
 import ProjectsScreen from './components/ProjectsScreen';
+import CommandShellComponent from './components/CommandShell';
 import SlowPrint from './effects/SlowPrint';
 
 interface ComponentsDictionary {
@@ -22,20 +23,32 @@ const App = () => {
     projects: ProjectsScreen(), 
   }
 
+  const initial_prompt = (
+    <div className='command-shell-item'>
+        <div>nimrod.ai:</div>
+        <SlowPrint words={['hi', 'there']} interval={400} />
+    </div>
+  )
 
   const [screen, setScreen] = useState(menuComponents['home']);
-  const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>([])
+  const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>([initial_prompt])
 
   const handleClick = (e: any) => {
     // console.log(e.target.id); 
     setScreen(menuComponents[e.target.id])
 
+    let response = ''; 
+    let words = [] 
+
     switch (e.target.id) {
       case 'projects':
+        response = 'you chose projects I see do you have a question about one of them in particular?';
+        words = response.split(' '); 
+
         const projects_shell = (
           <div className='command-shell-item'>
             <div>nimrod.ai: </div>
-            <SlowPrint words={['you', 'are']} interval={400}/>
+            <SlowPrint words={words} interval={400}/>
           </div>
         );
         setShellPrompts([...shellPrompts, projects_shell])
@@ -54,7 +67,7 @@ const App = () => {
             </div>
         </div>
 
-        {/* <!-- Top Grid Section --> */}
+        {/* MARK: Top Grid */}
         <div className="top-grid">
             {/* <!-- Grid Items --> */}
 
@@ -81,25 +94,33 @@ const App = () => {
                       <div className='icon'>⚙️</div>
                       <button id='projects' onClick={(e) => handleClick(e)}>Projects</button>
                   </div>
+                  <div className='menu-grid-item'>
+                      <div className='icon'>⚙️</div>
+                      <button id='blog' onClick={(e) => handleClick(e)}>Blog</button>
+                  </div>
+                  <div className='menu-grid-item'>
+                      <div className='icon'>⚙️</div>
+                      <button id='about-me' onClick={(e) => handleClick(e)}>About Me</button>
+                  </div>
+                  <div className='menu-grid-item'>
+                      <div className='icon'>⚙️</div>
+                      <button id='extras' onClick={(e) => handleClick(e)}>Extras</button>
+                  </div>
                 </div>
             </div>
+            
 
             <div className="grid-item">
 
-                <div className="command-shell">
-                    <div className='command-shell-item'>
-                        <div>nimrod.ai: </div>
-                        <SlowPrint words={['hi', 'there', 'my', 'name']} interval={400}/>
-                    </div>
-                    {shellPrompts}
-                </div>
+              <CommandShellComponent shellPrompts={shellPrompts}/> 
 
             </div>
             
         </div>
 
-        {/* <!-- Footer Section --> */}
+        {/* MARK: Footer */}
         <div className="footer">
+            <input className='footer-input' type='text' placeholder='Type Something if you wish to talk to nimrod.ai....'></input>
             <p>luissantanderdev.com @ all rights reserved.</p>
         </div>
     </div>
