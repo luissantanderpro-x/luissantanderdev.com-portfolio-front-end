@@ -16,6 +16,8 @@ $color-cyan: cyan;
 }
 
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -190,8 +192,6 @@ button:hover {
     animation: fadeOscillator 3s infinite;
 }
 
-
-
 // MARK: Command Shell
 
 .command-shell {
@@ -221,17 +221,17 @@ button:hover {
     display: flex;
     align-items: left;
     flex-direction: column;
-
+  
     .footer-input {
-        border-style: none;
-        background-color: #000;
-        color: $color-cyan;
-        margin-bottom: 10px;
+      border-style: none;
+      background-color: #000;
+      margin-bottom: 10px;
 
-        &::placeholder {
-            text-align: center;
-            color: white;
-        }
+      color: $color-cyan;
+      
+      &::placeholder {
+        color: white; 
+        text-align: center;
+      }
     }
-
 }

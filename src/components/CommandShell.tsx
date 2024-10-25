@@ -1,17 +1,10 @@
-import React, {useState} from 'react'; 
-
-import SlowPrint from '../effects/SlowPrint';
+import React from 'react'; 
 
 interface CommandShellProps {
     shellPrompts: JSX.Element[];
 }; 
 
 const CommandShellComponent: React.FC<CommandShellProps> = React.memo(({shellPrompts}) => {
-    // const scrollRef = useRef(null); 
-
-
-
-
     return (
       <div className="command-shell">
           {shellPrompts}

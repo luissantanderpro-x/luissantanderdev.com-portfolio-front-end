@@ -1,4 +1,4 @@
-import React, {ReactNode, useState, useMemo} from 'react';
+import React, {ReactNode, useState} from 'react';
 
 import nimrod_image from './images/nimrod.jpg'; 
 import tv_static_image from './images/tv_static.jpg';
@@ -24,14 +24,32 @@ const App = () => {
   }
 
   const initial_prompt = (
-    <div className='command-shell-item'>
+    <div className='command-shell-item' key='0'>
         <div>nimrod.ai:</div>
         <SlowPrint words={['hi', 'there']} interval={400} />
     </div>
   )
 
+  // MARK: State 
+
   const [screen, setScreen] = useState(menuComponents['home']);
   const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>([initial_prompt])
+  const [inputField, setInputField] = useState<string>('')
+
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      // Do Something
+      setInputField(e.target.value) 
+  }
+
+  const handleKeyPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+          // Do Something 
+          console.log(inputField); 
+
+          setInputField(''); 
+      }
+  }
 
   const handleClick = (e: any) => {
     // console.log(e.target.id); 
@@ -46,11 +64,12 @@ const App = () => {
         words = response.split(' '); 
 
         const projects_shell = (
-          <div className='command-shell-item'>
+          <div className='command-shell-item' key={'' + shellPrompts.length}>
             <div>nimrod.ai: </div>
             <SlowPrint words={words} interval={400}/>
           </div>
         );
+
         setShellPrompts([...shellPrompts, projects_shell])
         break; 
     }
@@ -120,7 +139,14 @@ const App = () => {
 
         {/* MARK: Footer */}
         <div className="footer">
-            <input className='footer-input' type='text' placeholder='Type Something if you wish to talk to nimrod.ai....'></input>
+            <input 
+              className='footer-input' 
+              type='text' 
+              value={inputField}
+              placeholder='Type Something if you wish to talk to nimrod.ai....'
+              onChange={handleInputChange}
+              onKeyDown={handleKeyPressed}
+              />
             <p>luissantanderdev.com @ all rights reserved.</p>
         </div>
     </div>
