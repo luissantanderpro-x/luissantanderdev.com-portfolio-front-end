@@ -15,9 +15,6 @@ $color-cyan: cyan;
     100% { opacity: 0.2; }  /* Fully visible again */
 }
 
-
-
-
 * {
     margin: 0;
     padding: 0;
@@ -70,7 +67,7 @@ body {
     }    
 }
 
-/* Grid Layout */
+// MARK: - Menu Grid Logic
 .grid {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -136,20 +133,19 @@ button:hover {
     background-color: #00cc99;
 }
 
-
-
-// Top Grid Rules 
+// MARK: - Top Grid 
 
 .top-grid {
     display: grid;
     grid-template-columns: 30% 70%;
     grid-gap: 5px;
     margin-bottom: 10px;
-
     border-radius: 10px;
     border: 1px solid $color-cyan;
     padding: 5px;
     align-items: start;
+    color: white;
+    text-align: center;
 }
 
 .top-grid-item {
@@ -161,10 +157,61 @@ button:hover {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.top-grid-display {
-    // border: 1px solid white;
-    color: white;
-    text-align: center;
+.top-grid-right-display {
+    display: grid;
+    grid-template-rows: 10% 90%;
+    border: 1px solid white;
+    height: 100%;
+    padding: 10px;
+    color: pink;
+
+    h1 {
+        background-color: blue;
+        color: white;
+        text-align: center;
+    }
+
+    .top-grid-right-display-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        height: 100%; 
+        overflow-y: auto;
+    }
+}
+
+.project-item {
+    display: grid; 
+    grid-template-columns: 25% 75%;
+    flex: 0 0 50%; /* Each project item takes 50% of the parent's height */
+    // border: 1px solid red; 
+    height: 100%;
+    padding: 1px;
+
+    .project-item-body {
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+
+        p {
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        button {
+            flex: 0.5;
+            align-self: flex-end;
+            width: 25%;
+        }
+    }
+}
+
+.project-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    width: 100%; 
+    height: 100%; 
 }
 
 // Image Box
@@ -172,7 +219,6 @@ button:hover {
     position: relative;
     border-radius: 10px;
     border: 1px solid $color-cyan;
-    // padding: 10px; 
 }
 
 .base-image {
@@ -235,3 +281,4 @@ button:hover {
       }
     }
 }
+
