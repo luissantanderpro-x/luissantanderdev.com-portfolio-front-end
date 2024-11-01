@@ -1,6 +1,6 @@
 import React from 'react' 
 
-
+// MARK: Image Imports 
 import project1 from '../assets/gifs/project-gifs/pacman-project.gif'; 
 
 
