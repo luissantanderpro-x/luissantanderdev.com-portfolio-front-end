@@ -60,7 +60,7 @@ const App = () => {
 
     switch (e.target.id) {
       case 'projects':
-        response = 'you chose projects I see do you have a question about one of them in particular?';
+        response = 'you chose projects I see. do you have a question about one of them in particular?';
         words = response.split(' '); 
 
         const projects_shell = (
@@ -113,26 +113,19 @@ const App = () => {
                       <div className='icon'>⚙️</div>
                       <button id='projects' onClick={(e) => handleClick(e)}>Projects</button>
                   </div>
-                  <div className='menu-grid-item'>
+                  {/* <div className='menu-grid-item'>
                       <div className='icon'>⚙️</div>
                       <button id='blog' onClick={(e) => handleClick(e)}>Blog</button>
-                  </div>
+                  </div> */}
                   <div className='menu-grid-item'>
                       <div className='icon'>⚙️</div>
                       <button id='about-me' onClick={(e) => handleClick(e)}>About Me</button>
                   </div>
-                  <div className='menu-grid-item'>
-                      <div className='icon'>⚙️</div>
-                      <button id='extras' onClick={(e) => handleClick(e)}>Extras</button>
-                  </div>
                 </div>
             </div>
             
-
             <div className="grid-item">
-
               <CommandShellComponent shellPrompts={shellPrompts}/> 
-
             </div>
             
         </div>
