@@ -7,28 +7,30 @@ import tv_static_image from './images/tv_static.jpg';
 
 import HomeScreen from './components/HomeScreen';
 import ProjectsScreen from './components/ProjectsScreen';
+import AboutMeScreen from './components/AboutMeScreen';
 import CommandShellComponent from './components/CommandShell';
 import SlowPrint from './effects/SlowPrint';
+
+// MARK: - App 
 
 interface ComponentsDictionary {
   [key: string]: ReactNode; 
 }
 
-// MARK: - App 
-
 const App = () => {
 
   const menuComponents: ComponentsDictionary = {
-    home: HomeScreen(),
-    projects: ProjectsScreen(), 
-  }
+    home: <HomeScreen />, 
+    about_me: <AboutMeScreen />, 
+    projects: <ProjectsScreen /> 
+  }; 
 
   const initial_prompt = (
     <div className='command-shell-item' key='0'>
         <div>nimrod.ai:</div>
         <SlowPrint words={['hi', 'there']} interval={400} />
     </div>
-  )
+  );
 
   // MARK: State 
 
@@ -59,30 +61,38 @@ const App = () => {
     let words = [] 
 
     switch (e.target.id) {
+      case 'home': 
+        response = 'Back to the home screen';
+        break; 
       case 'projects':
         response = 'you chose projects I see. do you have a question about one of them in particular?';
-        words = response.split(' '); 
-
-        const projects_shell = (
-          <div className='command-shell-item' key={'' + shellPrompts.length}>
-            <div>nimrod.ai: </div>
-            <SlowPrint words={words} interval={400}/>
-          </div>
-        );
-
-        setShellPrompts([...shellPrompts, projects_shell])
         break; 
-    }
-  }
+      case 'about_me':
+        response = 'you chose about me so what would you like to learn about Luis Santander?'; 
+        break; 
+      default:
+        response = '';  
+        words = []; 
+    }; 
+
+    words = response.split(' '); 
+
+    const projects_shell = (
+      <div className='command-shell-item' key={'' + shellPrompts.length}>
+        <div>nimrod.ai: </div>
+        <SlowPrint words={words} interval={400}/>
+      </div>
+    );
+
+    setShellPrompts([...shellPrompts, projects_shell]);
+  }; 
 
   return (
     <div className="container">
         {/* <!-- Header Section --> */}
         <div className="header">
             <div className="header-buttons">
-                <button></button>
-                <button></button>
-                <button></button>
+                <button id='home' onClick={(e) => handleClick(e)}>🏠</button>
             </div>
         </div>
 
@@ -113,13 +123,9 @@ const App = () => {
                       <div className='icon'>⚙️</div>
                       <button id='projects' onClick={(e) => handleClick(e)}>Projects</button>
                   </div>
-                  {/* <div className='menu-grid-item'>
-                      <div className='icon'>⚙️</div>
-                      <button id='blog' onClick={(e) => handleClick(e)}>Blog</button>
-                  </div> */}
                   <div className='menu-grid-item'>
-                      <div className='icon'>⚙️</div>
-                      <button id='about-me' onClick={(e) => handleClick(e)}>About Me</button>
+                      <div className='icon'>🧑</div>
+                      <button id='about_me' onClick={(e) => handleClick(e)}>About Me</button>
                   </div>
                 </div>
             </div>
