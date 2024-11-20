@@ -5,7 +5,8 @@ import SlowPrint from '../effects/SlowPrint';
 const AboutMeScreen = () => {
     const messages = [
       `My name is Luis Santander and I am a software developer.
-      I am 32 years old and I graduated from Cal Poly Pomona with my Bachelors of Science in Computer Science.
+      I am a Computer Science Cal Poly Pomona Alumni. My interests and skills are provided down below. 
+      So enjoy exploring my website. 
       `,
       `Hobbies: Music Production, Gaming.`,
       `Programming Languages: Python, JavaScript, Java, C, HTML, CSS.`,
@@ -15,7 +16,7 @@ const AboutMeScreen = () => {
     const messageOutput = messages.map((message, index) => {
         return (
           <div key={index}>
-            <SlowPrint words={message.split(' ')} interval={300}/>
+            <SlowPrint msg={message} interval={300}/>
             <h1>--------------</h1>
           </div>
         ); 

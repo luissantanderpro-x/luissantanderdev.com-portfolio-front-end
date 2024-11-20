@@ -11,6 +11,106 @@ import AboutMeScreen from './components/AboutMeScreen';
 import CommandShellComponent from './components/CommandShell';
 import SlowPrint from './effects/SlowPrint';
 
+
+// Write new Component Here Before Modularizing it. 
+
+interface FormData {
+    name: string, 
+    email: string, 
+    message: string
+}
+
+function isValidEmail(email: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+
+const ContactMeScreen = () => {
+
+    const [formData, setFormData] = useState<FormData>({
+      name: '',
+      email: '', 
+      message: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target; 
+
+        if (name == 'email') {
+          console.log(isValidEmail(value)); 
+        }
+
+        setFormData({
+          ...formData,
+          [name]: value
+        }); 
+    }
+
+    // TODO: Work on Handling Form Submission. 
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); 
+        
+    }
+
+    const handleRedirect = () => {
+      window.location.href = 'https://www.linkedin.com/in/luissantanderpro/'; 
+    }
+
+    const handleResumeDownload = () => {
+        const link = document.createElement('a');
+        link.href = 'https://drive.google.com/uc?export=download&id=1jHBZ2CK-SdIg5xGcW-fP-TSyC919-sP3';
+        link.download = 'Luis Santander Resume.pdf'; // Filename for the downloaded file
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    return (
+      <div className='contact-screen'>
+        <h1>Contact Me</h1>
+          <form className='contact-screen-body' onSubmit={handleSubmit}>
+            <label htmlFor="name" className='item1'>Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className='item2'
+            />
+            <label htmlFor="email" className='item3'>Email:</label>
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className='item4'
+            />
+            <label 
+              htmlFor="message"
+              className='item5'>
+                Message:
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              className='item6'
+            />
+            <button type="submit">Submit</button>
+            <div className='item8'>
+              <button onClick={handleResumeDownload}>📑Resume</button>
+              <button onClick={handleRedirect}>👔Linkedln</button>
+            </div>
+            </form>
+      </div>
+    ); 
+}
+
 // MARK: - App 
 
 interface ComponentsDictionary {
@@ -21,14 +121,15 @@ const App = () => {
 
   const menuComponents: ComponentsDictionary = {
     home: <HomeScreen />, 
-    about_me: <AboutMeScreen />, 
-    projects: <ProjectsScreen /> 
+    projects: <ProjectsScreen />,
+    about_me: <AboutMeScreen />,
+    contact_me: <ContactMeScreen />
   }; 
 
   const initial_prompt = (
     <div className='command-shell-item' key='0'>
         <div>nimrod.ai:</div>
-        <SlowPrint words={['hi', 'there']} interval={400} />
+        <SlowPrint msg={'hi there'} interval={400} />
     </div>
   );
 
@@ -38,7 +139,6 @@ const App = () => {
   const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>([initial_prompt])
   const [inputField, setInputField] = useState<string>('')
 
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       // Do Something
       setInputField(e.target.value) 
@@ -46,19 +146,14 @@ const App = () => {
 
   const handleKeyPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
-          // Do Something 
-          console.log(inputField); 
-
           setInputField(''); 
       }
   }
 
   const handleClick = (e: any) => {
-    // console.log(e.target.id); 
     setScreen(menuComponents[e.target.id])
 
     let response = ''; 
-    let words = [] 
 
     switch (e.target.id) {
       case 'home': 
@@ -70,17 +165,17 @@ const App = () => {
       case 'about_me':
         response = 'you chose about me so what would you like to learn about Luis Santander?'; 
         break; 
+      case 'contact_me':
+        response = 'you wish to contact Luis please fill out the form.'; 
+        break; 
       default:
         response = '';  
-        words = []; 
     }; 
-
-    words = response.split(' '); 
 
     const projects_shell = (
       <div className='command-shell-item' key={'' + shellPrompts.length}>
         <div>nimrod.ai: </div>
-        <SlowPrint words={words} interval={400}/>
+        <SlowPrint msg={response} interval={400}/>
       </div>
     );
 
@@ -93,6 +188,7 @@ const App = () => {
         <div className="header">
             <div className="header-buttons">
                 <button id='home' onClick={(e) => handleClick(e)}>🏠</button>
+                <button id='contact_me' onClick={(e) => handleClick(e)}>🤙 Contact Me</button>
             </div>
         </div>
 
@@ -126,6 +222,10 @@ const App = () => {
                   <div className='menu-grid-item'>
                       <div className='icon'>🧑</div>
                       <button id='about_me' onClick={(e) => handleClick(e)}>About Me</button>
+                  </div>
+                  <div className='menu-grid-item'>
+                      <div className='icon'>🧑</div>
+                      <button id='contact_me' onClick={(e) => handleClick(e)}>Contact Me</button>
                   </div>
                 </div>
             </div>
