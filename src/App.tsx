@@ -114,14 +114,18 @@ const App = () => {
         <div className="top-grid">
 
             <div className="top-grid-item">
+
                 <div className="picture-container">
                     <img className='base-image' src={nimrod_image} alt="codec screen"/>
                     {/* <img className='overlay-image' src={tv_static_image} alt="static screen" /> */}
                 </div>
+                
             </div>
 
             <div className="top-grid-item">
+
                 {screen}
+
             </div>
 
         </div>
@@ -131,27 +135,27 @@ const App = () => {
             <div className="grid-item">
                 <div className='menu-grid-container'>
                   <div className='menu-grid-item'>
-                      <div className='icon'>⚙️</div>
+                      <div className='menu-grid-item-icon'>⚙️</div>
                       <button id='projects' onClick={(e) => handleClick(e)}>Projects</button>
                   </div>
                   <div className='menu-grid-item'>
-                      <div className='icon'>🧑</div>
+                      <div className='menu-grid-item-icon'>🧑</div>
                       <button id='about_me' onClick={(e) => handleClick(e)}>About Me</button>
                   </div>
                   <div className='menu-grid-item'>
-                      <div className='icon'>📧</div>
+                      <div className='menu-grid-item-icon'>📧</div>
                       <button id='contact_me' onClick={(e) => handleClick(e)}>Contact Me</button>
                   </div>
                 </div>
             </div>
             
-            {/* <div className="grid-item">
+            <div className="grid-item">
               <CommandShellComponent shellPrompts={shellPrompts}/> 
-            </div> */}
+            </div>
             
         </div>
 
-        {/* <div className="footer">
+        <div className="footer">
             <input 
               className='footer-input' 
               type='text' 
@@ -161,7 +165,7 @@ const App = () => {
               onKeyDown={handleKeyPressed}
               />
             <p>luissantanderdev.com @ all rights reserved.</p>
-        </div> */}
+        </div>
     </div>
   ); 
 }

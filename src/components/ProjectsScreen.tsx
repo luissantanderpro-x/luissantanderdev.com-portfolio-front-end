@@ -22,6 +22,7 @@ const Project: React.FC<ProjectPrompts> = ({url, imageURL, projectName, projectD
   };
 
   const handleClick = () => {
+    console.log('clicked')
     window.location.href = url
   };
 
@@ -29,7 +30,7 @@ const Project: React.FC<ProjectPrompts> = ({url, imageURL, projectName, projectD
     <>
       <div className='project-image' style={styling}></div>
       <div className='project-item-body'>
-          <h3>{projectName}</h3>
+          <p>{projectName}</p>
           <p>Description: {projectDescription}</p>
           <p>Tools: {projectTooling}</p>
           <button onClick={handleClick}>Link</button>
@@ -80,9 +81,10 @@ const projects = [
 
 const ProjectComponent = () => {
 
-    const projects_elements = projects.map((project) => {
+    const projects_elements = projects.map((project, index) => {
         return <Project 
-          url={project.name}
+          key={index}
+          url={project.url}
           imageURL={project.image_url}
           projectName={project.name}
           projectDescription={project.description}
@@ -100,7 +102,7 @@ const ProjectComponent = () => {
 const ProjectsScreen = () => {
     return (
       <div className='top-grid-right-display'>
-        <h1>Projects</h1> 
+        <h1>Projects</h1>
         <div className='top-grid-right-display-body'>
             <ProjectComponent /> 
         </div>

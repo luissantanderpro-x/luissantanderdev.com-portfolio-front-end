@@ -1,4 +1,22 @@
 
+
+// .base-image {
+//     max-height: 100%;
+//     max-width: 100%;
+//     object-fit: contain;
+// }
+// .overlay-image {
+//     padding: 5px;
+//     position: absolute; /* Position the overlay image absolutely within the container */
+//     top: 50%; /* Start at the top of the container */
+//     left: 50%; /* Align to the left of the container */
+//     transform: translate(-50%, -50%); /* Center the overlay */
+//     width: 100%; /* Optional: Size of the overlay */
+//     height: 100%;
+//     animation: fadeOscillator 3s infinite;
+// }
+
+
 // Color Pallet 
 // ============================================
 
@@ -6,6 +24,14 @@ $color-red: red;
 $color-cyan: cyan; 
 
 // ============================================
+
+// MARK: - Fixed Properties 
+
+.center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 // MARK: - Animation Logic
 
@@ -29,22 +55,27 @@ body {
 }
 
 #root {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend .center-flex; 
     height: 100%;
 }
 
 .container {
     display: grid;
-    grid-template-rows: 10% 50% 40%;
+    grid-template-rows: 8% 36% 40% 16%;
     grid-gap: 10px;
+
     background-color: #222;
     padding: 1px 10px 10px 10px;
     border-radius: 10px;
-    border: 1px solid pink;
-    width: 75%;
+    border: 1px solid $color-cyan;
+
+    width: 70%;
     height: 75%;
+
+    @media (min-width: 1025px) and (max-width: 1600px) {
+        width: 50%;
+        height: 80%;
+    } 
 }
 
 // MARK: Header 
@@ -69,9 +100,7 @@ body {
     }
 
     button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @extend .center-flex;
         background-color: black;
         border: 1px solid $color-cyan;
         margin: 3px;
@@ -85,46 +114,6 @@ body {
     }    
 }
 
-// MARK: - Menu Grid Logic
-.bottom-grid {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    // grid-gap: 10px;
-
-    padding: 10px;
-
-    background-color: red;
-
-    overflow: hidden;
-
-    height: 100%;
-
-    background-color: blue;
-}
-
-.menu-grid-container {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(2, 1fr);
-    overflow: scroll;
-    height: 15rem;
-    scroll-behavior: smooth;
-
-    height: 100%;
-
-    background-color: blue;
-}
-
-.menu-grid-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid $color-cyan;
-    border-radius: 10px;
-
-}
-
 /* Grid Items */
 .grid-item {
     background-color: #111;
@@ -132,8 +121,6 @@ body {
     padding: 15px;
     text-align: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-
-    height: 100%;
 
     overflow: hidden;
 }
@@ -185,8 +172,7 @@ button:hover {
 }
 
 .top-grid-display {
-    height: 100%;
-    
+
     div {
         font-size: 0.7rem;
     }
@@ -210,25 +196,6 @@ button:hover {
     box-shadow: 0 0 10px #00ffcc;
 }
 
-// .top-grid-right-display {
-//     display: grid;
-//     grid-template-rows: 10% 90%;
-//     border: 1px solid $color-cyan;
-//     border-radius: 10px;
-//     padding: 10px;
-    
-
-//     h1 {
-//         color: white;
-//         border-bottom: 1px solid white;
-//         text-align: center;
-//     }
-
-//     .top-grid-right-display-body {
-//         overflow: auto;
-//     }
-// }
-
 .picture-container {
     position: relative;
     width: 100%;
@@ -236,43 +203,55 @@ button:hover {
     // overflow: hidden;
 }
 
-// .base-image {
-//     max-height: 100%;
-//     max-width: 100%;
-//     object-fit: contain;
-// }
-// .overlay-image {
-//     padding: 5px;
-//     position: absolute; /* Position the overlay image absolutely within the container */
-//     top: 50%; /* Start at the top of the container */
-//     left: 50%; /* Align to the left of the container */
-//     transform: translate(-50%, -50%); /* Center the overlay */
-//     width: 100%; /* Optional: Size of the overlay */
-//     height: 100%;
-//     animation: fadeOscillator 3s infinite;
-// }
 
-// MARK: Projects
+.top-grid-right-display {
+    display: grid;
+    grid-template-rows: 10% 90%; 
+    place-items: center;
+    border: 1px solid $color-cyan;
+    border-radius: 10px;
+
+    padding: 10px;
+    height: 100%;
+
+    h1 {
+        width: 50%;
+    }
+    
+    &-body {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+}
+
 
 .project-item {
     display: grid; 
     grid-template-columns: 25% 75%;
-    padding: 1px;
+    padding: 5px;
 
-    .project-item-body {
+
+    &-body {
         background-color: black;
         display: flex;
         flex-direction: column;
 
+        height: 100%;
+
         p {
-            text-align: left;
-            font-size: 0.9rem;
+            text-align: center;
+            font-size: 0.5rem;
         }
 
         button {
-            flex: 0.5;
+            @extend .center-flex;
             align-self: flex-end;
+            font-size: 0.5rem;
             width: 25%;
+            height: 35%;
+            overflow: hidden;
+            white-space: nowrap; 
         }
     }
 }
@@ -285,9 +264,79 @@ button:hover {
     height: 100%; 
 }
 
+// MARK: - Bottom Grid 
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 2px;
+
+    padding: 5px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.menu-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px; 
+
+    overflow: scroll;
+    scroll-behavior: smooth;
+
+    height: 100%;
+}
+
+.menu-grid-item {
+    @extend .center-flex;
+    flex-direction: column;
+
+    border: 1px solid $color-cyan;
+    border-radius: 10px;
+    width: 95%;
+    height: 95%;
+
+    button {
+        @extend .center-flex;
+        font-size: 0.5rem;
+        width: 75%;
+        height: 35%;
+        overflow: hidden;
+        white-space: nowrap; 
+    }
+
+    // &-icon {
+    //     background-color: red;
+    // }
+}
 
 
 
+// MARK: - BG - Shell
+
+.command-shell {
+    height: 100%;
+    border: 1px solid $color-cyan;
+    background-color: #000;
+    border-radius: 10px;
+    padding: 10px;
+
+    color: $color-cyan;
+
+    overflow-y: auto;
+    text-align: left;
+    scroll-behavior: smooth;
+}
+
+.command-shell-item {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 25% 75%;
+
+    div {
+        font-size: 0.6rem;
+    }
+}
 
 // MARK: Top Contact Me 
 
@@ -301,8 +350,6 @@ button:hover {
         grid-template-columns: 25% 25% 25% 25%;
         grid-template-rows: repeat(7, 1fr);
         row-gap: 0.5rem;
-
-        // border: 1px solid cyan;
 
         .item1 {
             grid-column: 1 / 2;
@@ -350,44 +397,34 @@ button:hover {
     }
 }
 
-// MARK: Command Shell
-
-.command-shell {
-    height: 100%;
-    border: 1px solid $color-cyan;
-    border-radius: 10px;
-    padding: 10px;
-    color: $color-cyan;
-    overflow-y: auto;
-    text-align: left;
-    scroll-behavior: smooth;
-}
-
-.command-shell-item {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 25% 75%;
-}
 
 /* MARK: - Footer Area */
 
 .footer {
-    margin-top: 20px;
-    padding-top: 10px;
-    text-align: center;
-    font-size: 0.8rem;
-    border-top: 2px solid #00ffcc;
-    color: #00ffcc;
-    display: flex;
-    align-items: left;
+    @extend .center-flex;
     flex-direction: column;
+    
+    // border-top: 2px solid #00ffcc;
+    color: #00ffcc;
+
+    border: 1px solid white;
+
+
+    // background-color: blue;
+
+    height: 60%;
   
     .footer-input {
       border-style: none;
-      background-color: #000;
-      margin-bottom: 10px;
 
-      visibility: hidden; // Change this when we fix on the input logic
+      background-color: black;
+
+      font-size: 0.6rem;
+
+      width: 99%;
+      margin-bottom: 5px;
+
+    //   visibility: hidden; // Change this when we fix on the input logic
 
       color: $color-cyan;
       
@@ -395,6 +432,10 @@ button:hover {
         color: white; 
         text-align: center;
       }
+    }
+
+    p {
+        font-size: 0.5rem;
     }
 }
 
