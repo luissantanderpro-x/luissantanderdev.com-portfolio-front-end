@@ -25,21 +25,29 @@ $color-cyan: cyan;
 
 body {
     background-color: #000;
-    display: flex;
-    justify-content: center; // X-Direction 
-    align-items: start; // Y-Direction 
     height: 100vh;
 }
 
-.container {
-    width: 900px;
-    background-color: #222;
-    padding: 1px 10px 10px 10px;
-    margin-top: 5rem;
-    border-radius: 10px;
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-/* Header */
+.container {
+    display: grid;
+    grid-template-rows: 10% 50%;
+    background-color: #222;
+    padding: 1px 10px 10px 10px;
+    border-radius: 10px;
+    border: 1px solid pink;
+    width: 75%;
+    height: 75%;
+}
+
+// MARK: Header 
+
 .header {
     text-align: center;
     display: flex;
@@ -50,6 +58,9 @@ body {
     border-top-right-radius: 10px;
     background-color: black;
     border: 1px solid $color-cyan;
+    height: 100%;
+
+    background-color: red;
 
     .header-buttons {
         display: flex;
@@ -73,7 +84,7 @@ body {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-gap: 10px;
-    margin-bottom: 10px;
+
 }
 
 .menu-grid-container {
@@ -81,7 +92,7 @@ body {
     grid-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
     overflow-y: auto;
-    height: 10rem;
+    height: 15rem;
     scroll-behavior: smooth;
 }
 
@@ -92,7 +103,6 @@ body {
     align-items: center;
     border: 1px solid $color-cyan;
     border-radius: 10px;
-    height: 10rem;
 }
 
 /* Grid Items */
@@ -146,13 +156,14 @@ button:hover {
     align-items: start;
     color: white;
     text-align: center;
+    // height: 500px;
 }
 
 .top-grid-item {
-    height: 100%;
     background-color: #111;
     padding: 10px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
 }
 
 .top-grid-item:hover {
@@ -165,29 +176,24 @@ button:hover {
     grid-template-rows: 10% 90%;
     border: 1px solid $color-cyan;
     border-radius: 10px;
-    height: 100%;
     padding: 10px;
 
     h1 {
-        background-color: blue;
         color: white;
+        border-bottom: 1px solid white;
         text-align: center;
     }
 
     .top-grid-right-display-body {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        height: 100%; 
-        overflow-y: auto;
+        overflow: auto;
     }
 }
+
+// MARK: Projects
 
 .project-item {
     display: grid; 
     grid-template-columns: 25% 75%;
-    flex: 0 0 50%;
-    height: 100%;
     padding: 1px;
 
     .project-item-body {
@@ -302,7 +308,7 @@ button:hover {
 // MARK: Command Shell
 
 .command-shell {
-    height: 10rem; 
+    height: 100%;
     border: 1px solid $color-cyan;
     border-radius: 10px;
     padding: 10px;
