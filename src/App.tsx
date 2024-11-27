@@ -111,12 +111,12 @@ const App = () => {
         </div>
 
         {/* MARK: Top Grid */}
-        {/* <div className="top-grid">
+        <div className="top-grid">
 
             <div className="top-grid-item">
                 <div className="picture-container">
                     <img className='base-image' src={nimrod_image} alt="codec screen"/>
-                    <img className='overlay-image' src={tv_static_image} alt="static screen" />
+                    {/* <img className='overlay-image' src={tv_static_image} alt="static screen" /> */}
                 </div>
             </div>
 
@@ -124,10 +124,9 @@ const App = () => {
                 {screen}
             </div>
 
-        </div> */}
+        </div>
 
-        {/* <!-- Main Grid Section --> */}
-        {/* <div className="grid">
+        <div className="bottom-grid">
 
             <div className="grid-item">
                 <div className='menu-grid-container'>
@@ -146,11 +145,11 @@ const App = () => {
                 </div>
             </div>
             
-            <div className="grid-item">
+            {/* <div className="grid-item">
               <CommandShellComponent shellPrompts={shellPrompts}/> 
-            </div>
+            </div> */}
             
-        </div> */}
+        </div>
 
         {/* <div className="footer">
             <input 

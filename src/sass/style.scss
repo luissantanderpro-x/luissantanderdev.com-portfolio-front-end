@@ -37,7 +37,8 @@ body {
 
 .container {
     display: grid;
-    grid-template-rows: 10% 50%;
+    grid-template-rows: 10% 50% 40%;
+    grid-gap: 10px;
     background-color: #222;
     padding: 1px 10px 10px 10px;
     border-radius: 10px;
@@ -49,51 +50,69 @@ body {
 // MARK: Header 
 
 .header {
-    text-align: center;
     display: flex;
     justify-content: right;
     margin-top: 10px;
-    margin-bottom: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: black;
     border: 1px solid $color-cyan;
-    height: 100%;
-
-    background-color: red;
 
     .header-buttons {
         display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        padding: 5px;
+
+        height: 100%;
     }
 
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: black;
         border: 1px solid $color-cyan;
         margin: 3px;
         cursor: pointer;
         font-weight: bold;
-        font-size: 1rem;
+        font-size: 0.5rem;
         border-radius: 10px;
         transition: background-color 0.3s ease;
         color: white;
+        height: 100%;
     }    
 }
 
 // MARK: - Menu Grid Logic
-.grid {
+.bottom-grid {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-gap: 10px;
+    // grid-gap: 10px;
 
+    padding: 10px;
+
+    background-color: red;
+
+    overflow: hidden;
+
+    height: 100%;
+
+    background-color: blue;
 }
 
 .menu-grid-container {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
-    overflow-y: auto;
+    overflow: scroll;
     height: 15rem;
     scroll-behavior: smooth;
+
+    height: 100%;
+
+    background-color: blue;
 }
 
 .menu-grid-item {
@@ -103,6 +122,7 @@ body {
     align-items: center;
     border: 1px solid $color-cyan;
     border-radius: 10px;
+
 }
 
 /* Grid Items */
@@ -112,6 +132,10 @@ body {
     padding: 15px;
     text-align: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    height: 100%;
+
+    overflow: hidden;
 }
 
 .grid-item:hover {
@@ -149,21 +173,36 @@ button:hover {
     display: grid;
     grid-template-columns: 30% 70%;
     grid-gap: 5px;
-    margin-bottom: 10px;
+    
     border-radius: 10px;
     border: 1px solid $color-cyan;
     padding: 5px;
-    align-items: start;
     color: white;
-    text-align: center;
-    // height: 500px;
+    text-align: center;  
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.top-grid-display {
+    height: 100%;
+    
+    div {
+        font-size: 0.7rem;
+    }
 }
 
 .top-grid-item {
     background-color: #111;
-    padding: 10px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
+    padding: 10px;                    
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        // object-fit: contain; # Keep Aspect Ratio
+    }
 }
 
 .top-grid-item:hover {
@@ -171,23 +210,47 @@ button:hover {
     box-shadow: 0 0 10px #00ffcc;
 }
 
-.top-grid-right-display {
-    display: grid;
-    grid-template-rows: 10% 90%;
-    border: 1px solid $color-cyan;
-    border-radius: 10px;
-    padding: 10px;
+// .top-grid-right-display {
+//     display: grid;
+//     grid-template-rows: 10% 90%;
+//     border: 1px solid $color-cyan;
+//     border-radius: 10px;
+//     padding: 10px;
+    
 
-    h1 {
-        color: white;
-        border-bottom: 1px solid white;
-        text-align: center;
-    }
+//     h1 {
+//         color: white;
+//         border-bottom: 1px solid white;
+//         text-align: center;
+//     }
 
-    .top-grid-right-display-body {
-        overflow: auto;
-    }
+//     .top-grid-right-display-body {
+//         overflow: auto;
+//     }
+// }
+
+.picture-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    // overflow: hidden;
 }
+
+// .base-image {
+//     max-height: 100%;
+//     max-width: 100%;
+//     object-fit: contain;
+// }
+// .overlay-image {
+//     padding: 5px;
+//     position: absolute; /* Position the overlay image absolutely within the container */
+//     top: 50%; /* Start at the top of the container */
+//     left: 50%; /* Align to the left of the container */
+//     transform: translate(-50%, -50%); /* Center the overlay */
+//     width: 100%; /* Optional: Size of the overlay */
+//     height: 100%;
+//     animation: fadeOscillator 3s infinite;
+// }
 
 // MARK: Projects
 
@@ -222,27 +285,9 @@ button:hover {
     height: 100%; 
 }
 
-// Image Box
-.picture-container {
-    position: relative;
-    border-radius: 10px;
-}
 
-.base-image {
-    width: 100%;
-    height: 100%;
-}
 
-.overlay-image {
-    padding: 5px;
-    position: absolute; /* Position the overlay image absolutely within the container */
-    top: 50%; /* Start at the top of the container */
-    left: 50%; /* Align to the left of the container */
-    transform: translate(-50%, -50%); /* Center the overlay */
-    width: 100%; /* Optional: Size of the overlay */
-    height: 100%;
-    animation: fadeOscillator 3s infinite;
-}
+
 
 // MARK: Top Contact Me 
 
