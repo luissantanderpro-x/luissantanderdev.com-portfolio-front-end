@@ -63,47 +63,62 @@ body {
 
 .header {
     display: flex;
+    align-items: center;
     justify-content: right;
+    gap: 5px;
     margin-top: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: black;
     border: 1px solid $color-cyan;
 
-    .header-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        justify-items: center;
-        padding: 5px;
+    &-buttons {
+        @extend .center-flex;
+        font-size: 0.5rem;
+        font-weight: bold;
+        margin-right: 10px;
+        height: 25%;
+    }
+}
 
-        height: 100%;
+// MARK: Scroll Bar Styling 
+
+@mixin scrollbar($size, $foreground-color, $background-color: mix($foreground-color, white, 50%)) {
+
+    // For Google Chrome and Safari
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
     }
 
-    button {
-        @extend .center-flex;
-        background-color: black;
-        border: 1px solid $color-cyan;
-        margin: 3px;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 0.5rem;
-        border-radius: 10px;
-        transition: background-color 0.3s ease;
-        color: white;
-        height: 100%;
-    }    
+    &::-webkit-scrollbar-thumb {
+        background: $foreground-color;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $background-color;
+    }
+
+    // Internet Explorer
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+
+    // Modern browser support (Chrome 53+, Firefox 104+)
+    scrollbar-width: thin;
+    scrollbar-color: $foreground-color $background-color;
 }
 
 /* Grid Items */
 .grid-item {
     background-color: #111;
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
     overflow: hidden;
+
+    @include scrollbar(10px, $color-cyan, black)
 }
 
 .grid-item:hover {
@@ -254,6 +269,8 @@ button:hover {
         width: 100%;
         height: 100%;
         overflow: auto;
+
+        @include scrollbar(10px, $color-cyan, black);
     }
 }
 
@@ -309,6 +326,8 @@ button:hover {
         overflow-y: scroll;
         height: 95%;
 
+        @include scrollbar(10px, $color-cyan, black);
+
         &-name-label {
             grid-row: 1;
             grid-column: 1 / 2;
@@ -360,17 +379,13 @@ button:hover {
 // MARK: TP: Professional Links 
 
 .professional-links-screen {
-
     @extend .center-flex;
     flex-direction: column;
-
-    height: 100%;
-
+    background-color: #000;
     border: 1px solid $color-cyan;
     border-radius: 10px;
     padding: 10px;
-
-    background-color: #000;
+    height: 100%;
 
     &-header {
         font-size: 0.8rem;
@@ -450,10 +465,6 @@ button:hover {
         overflow: hidden;
         white-space: nowrap; 
     }
-
-    // &-icon {
-    //     background-color: red;
-    // }
 }
 
 
@@ -476,7 +487,7 @@ button:hover {
 
 .command-shell-item {
     display: grid;
-    grid-gap: 5px;
+    grid-gap: 8px;
     grid-template-columns: 25% 75%;
 
     div {
@@ -487,28 +498,18 @@ button:hover {
 /* MARK: - Footer Area */
 
 .footer {
-    @extend .center-flex;
+    display: flex; 
+    align-items: center;
     flex-direction: column;
-    
-    // border-top: 2px solid #00ffcc;
     color: #00ffcc;
-
-    border: 1px solid white;
-
-
-    // background-color: blue;
-
     height: 60%;
   
     .footer-input {
-      border-style: none;
-
       background-color: black;
-
       font-size: 0.6rem;
-
-      width: 99%;
       margin-bottom: 5px;
+      height: 50%;
+      width: 99%;
 
     //   visibility: hidden; // Change this when we fix on the input logic
 

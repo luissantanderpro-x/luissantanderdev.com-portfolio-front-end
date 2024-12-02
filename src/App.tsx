@@ -49,14 +49,13 @@ const App = () => {
 
   const [screen, setScreen] = useState(menuComponents[currentScreen]);
   const [inputField, setInputField] = useState<string>('')
-
-  // This changes the state as the client talks to the Model which will change the state. 
+ 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputField(e.target.value) 
   }
 
   // TODO: When Pressing Enter This Piece of Code will talk to the backend. 
-  //       Will interact with the AI Model that I am working in. 
+  //       Will interact with the AI Model that I am working on. 
   const handleKeyPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
           setInputField(''); 
@@ -107,10 +106,19 @@ const App = () => {
     <div className="container">
 
         <div className="header">
-            <div className="header-buttons">
-                <button id='home' onClick={(e) => handleClick(e)}>🏠 Home</button>
-                <button id='contact_me' onClick={(e) => handleClick(e)}>🤙 Contact Me</button>
-            </div>
+                <button 
+                  id='home' 
+                  className='header-buttons'
+                  onClick={(e) => handleClick(e)}
+                  >
+                    🏠 Home
+                </button>
+                <button 
+                  id='contact_me' 
+                  className='header-buttons'
+                  onClick={(e) => handleClick(e)}>
+                    🤙 Contact Me
+                </button>
         </div>
 
         <div className="top-grid">
