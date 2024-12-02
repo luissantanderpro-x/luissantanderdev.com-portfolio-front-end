@@ -23,9 +23,9 @@ const AboutMeScreen = () => {
     })
 
     return (
-      <div className='top-grid-display'>
-        <h1>About me</h1>
-        {messageOutput}
+      <div className='top-grid-item-about-me'>
+        <div className='top-grid-item-about-me-header'>About Me</div>
+        <div className='top-grid-item-about-me-body'>{messageOutput}</div>
       </div>
     );
 }

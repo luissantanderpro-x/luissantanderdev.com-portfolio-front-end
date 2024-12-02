@@ -101,9 +101,9 @@ const ProjectComponent = () => {
 
 const ProjectsScreen = () => {
     return (
-      <div className='top-grid-right-display'>
-        <h1>Projects</h1>
-        <div className='top-grid-right-display-body'>
+      <div className='top-grid-projects'>
+        <div className='top-grid-projects-header'>Projects</div>
+        <div className='top-grid-projects-body'>
             <ProjectComponent /> 
         </div>
       </div>

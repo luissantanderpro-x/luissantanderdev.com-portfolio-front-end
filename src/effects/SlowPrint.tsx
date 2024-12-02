@@ -5,8 +5,6 @@ interface SlowPrintProps {
     interval: number; 
 }; 
 
-
-
 // MARK: - Slow Print 
 
 const SlowPrint: React.FC<SlowPrintProps> = ({msg, interval}) => {

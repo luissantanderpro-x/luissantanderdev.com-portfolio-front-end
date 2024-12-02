@@ -1,5 +1,7 @@
 import React, { useState } from 'react'; 
 
+// MARK: Component 
+
 interface FormData {
     name: string, 
     email: string, 
@@ -21,12 +23,11 @@ const ContactMeScreen = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target; 
-
         setFormData({
           ...formData,
           [name]: value
         }); 
-    }
+    };
 
     // TODO: Work on Handling Form Submission. 
 
@@ -40,47 +41,41 @@ const ContactMeScreen = () => {
         } else {
             console.log('Not Valid Email'); 
         }
-        
-    }
-
-    const handleRedirect = () => {
-      window.location.href = 'https://www.linkedin.com/in/luissantanderpro/'; 
-    }
-
-    const handleResumeDownload = () => {
-        const link = document.createElement('a');
-        link.href = 'https://drive.google.com/uc?export=download&id=1jHBZ2CK-SdIg5xGcW-fP-TSyC919-sP3';
-        link.download = 'Luis Santander Resume.pdf'; // Filename for the downloaded file
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
+    };
 
     return (
       <div className='contact-screen'>
-        <h1>Contact Me</h1>
+          <div className='contact-screen-header'>Contact Me</div>
           <form className='contact-screen-body' onSubmit={handleSubmit}>
-            <label htmlFor="name" className='item1'>Name:</label>
+            <label 
+              htmlFor="name" 
+              className='contact-screen-body-name-label'>
+                Name:
+            </label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className='item2'
+              className='contact-screen-body-name-field'
             />
-            <label htmlFor="email" className='item3'>Email:</label>
+            <label 
+              htmlFor="email" 
+              className='contact-screen-body-email-label'>
+                Email:
+            </label>
             <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className='item4'
+                    className='contact-screen-body-email-field'
             />
             <label 
               htmlFor="message"
-              className='item5'>
+              className='contact-screen-body-message-label'>
                 Message:
             </label>
             <textarea
@@ -88,14 +83,14 @@ const ContactMeScreen = () => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              className='item6'
+              className='contact-screen-body-message-textarea'
               maxLength={200}
             />
-            <button type="submit">Submit</button>
-            <div className='item8'>
-              <button onClick={handleResumeDownload}>📑Resume</button>
-              <button onClick={handleRedirect}>👔Linkedln</button>
-            </div>
+            <button 
+              type="submit" 
+              className='contact-screen-body-submit-button'>
+                Submit
+            </button>
             </form>
       </div>
     ); 

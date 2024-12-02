@@ -10,10 +10,9 @@ import ProjectsScreen from './components/ProjectsScreen';
 import AboutMeScreen from './components/AboutMeScreen';
 import CommandShellComponent from './components/CommandShell';
 import ContactMeScreen from './components/ContactMeScreen';
+import ProfessionalLinksScreen from './components/ProfessionalLinksScreen';
 import SlowPrint from './effects/SlowPrint';
 
-
-// MARK: New Component 
 
 // MARK: - App 
 
@@ -25,28 +24,29 @@ const menuComponents: ComponentsDictionary = {
   home: <HomeScreen />, 
   projects: <ProjectsScreen />,
   about_me: <AboutMeScreen />,
-  contact_me: <ContactMeScreen />
+  contact_me: <ContactMeScreen />,
+  professional_links: <ProfessionalLinksScreen />
 }; 
-
-const initial_prompt = (
-  <div className='command-shell-item' key='0'>
-      <div>nimrod.ai:</div>
-      <SlowPrint msg={'hi there'} interval={400} />
-  </div>
-);
-
-// MARK: App Main
-
 
 const App = () => {
 
-  // MARK: State 
+  // MARK: App State 
 
   const [currentScreen, setCurrentScreen] = useState(() => {
       return sessionStorage.getItem('currentScreen') || 'home'; 
   });
 
-  const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>([initial_prompt]); 
+  const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>(() => {
+      return [
+          (  
+            <div className='command-shell-item' key='0'>
+              <div>nimrod.ai: </div>
+              <SlowPrint msg={'hi there'} interval={400} />
+              </div>
+          )
+      ]
+  }); 
+
   const [screen, setScreen] = useState(menuComponents[currentScreen]);
   const [inputField, setInputField] = useState<string>('')
 
@@ -86,6 +86,9 @@ const App = () => {
       case 'contact_me':
         response = 'you wish to contact Luis please fill out the form.'; 
         break; 
+      case 'professional_links':
+        response = "Here are Luis's resume and Linkedln."
+        break;
       default:
         response = '';  
     }; 
@@ -102,36 +105,27 @@ const App = () => {
 
   return (
     <div className="container">
-        {/* <!-- Header Section --> */}
+
         <div className="header">
             <div className="header-buttons">
-                <button id='home' onClick={(e) => handleClick(e)}>🏠</button>
+                <button id='home' onClick={(e) => handleClick(e)}>🏠 Home</button>
                 <button id='contact_me' onClick={(e) => handleClick(e)}>🤙 Contact Me</button>
             </div>
         </div>
 
-        {/* MARK: Top Grid */}
         <div className="top-grid">
-
             <div className="top-grid-item">
-
-                <div className="picture-container">
-                    <img className='base-image' src={nimrod_image} alt="codec screen"/>
-                    {/* <img className='overlay-image' src={tv_static_image} alt="static screen" /> */}
-                </div>
-                
+                <div className="picture">
+                    <img className='picture-base-image' src={nimrod_image} alt="codec screen"/>
+                    <img className='picture-overlay-image' src={tv_static_image} alt="static screen" />
+                </div> 
             </div>
-
             <div className="top-grid-item">
-
                 {screen}
-
             </div>
-
         </div>
 
         <div className="bottom-grid">
-
             <div className="grid-item">
                 <div className='menu-grid-container'>
                   <div className='menu-grid-item'>
@@ -146,13 +140,15 @@ const App = () => {
                       <div className='menu-grid-item-icon'>📧</div>
                       <button id='contact_me' onClick={(e) => handleClick(e)}>Contact Me</button>
                   </div>
+                  <div className='menu-grid-item'>
+                      <div className='menu-grid-item-icon'>👔</div>
+                      <button id='professional_links' onClick={(e) => handleClick(e)}>Resume</button>
+                  </div>
                 </div>
             </div>
-            
             <div className="grid-item">
               <CommandShellComponent shellPrompts={shellPrompts}/> 
             </div>
-            
         </div>
 
         <div className="footer">
