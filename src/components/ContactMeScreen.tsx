@@ -1,5 +1,8 @@
 import React, { useState } from 'react'; 
 
+
+import APIController from '../controllers/APIController';
+
 // MARK: Component 
 
 interface FormData {
@@ -36,8 +39,18 @@ const ContactMeScreen = () => {
 
         if (isValidEmail(formData.email)) {
             console.log('submitted to server');
-            
-            // TODO: Work on Logic that points to the backend in order to handle data. 
+
+            const api = new APIController(); 
+
+            const payload = {
+              data: {
+                name: formData.name, 
+                email: formData.email, 
+                message: formData.message 
+              }
+            }
+
+            api.handlePostRequest(payload, '/contact-submit'); 
         } else {
             console.log('Not Valid Email'); 
         }
