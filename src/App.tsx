@@ -13,7 +13,6 @@ import ContactMeScreen from './components/ContactMeScreen';
 import ProfessionalLinksScreen from './components/ProfessionalLinksScreen';
 import SlowPrint from './effects/SlowPrint';
 
-
 // MARK: - App 
 
 interface ComponentsDictionary {

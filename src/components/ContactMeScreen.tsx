@@ -1,6 +1,4 @@
 import React, { useState } from 'react'; 
-
-
 import APIController from '../controllers/APIController';
 
 // MARK: Component 
@@ -50,7 +48,7 @@ const ContactMeScreen = () => {
               }
             }
 
-            api.handlePostRequest(payload, '/contact-submit'); 
+            // api.handlePostRequest(payload, '/contact-submit'); 
         } else {
             console.log('Not Valid Email'); 
         }
