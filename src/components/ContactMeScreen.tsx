@@ -16,6 +16,9 @@ function isValidEmail(email: string) {
 
 const ContactMeScreen = () => {
 
+    const [isVisible, setIsVisible] = useState(true); 
+    const [contactBanner, setContactBanner] = useState(''); 
+
     const [formData, setFormData] = useState<FormData>({
       name: '',
       email: '', 
@@ -24,6 +27,7 @@ const ContactMeScreen = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target; 
+
         setFormData({
           ...formData,
           [name]: value
@@ -32,7 +36,7 @@ const ContactMeScreen = () => {
 
     // TODO: Work on Handling Form Submission. 
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
 
         if (isValidEmail(formData.email)) {
@@ -48,9 +52,19 @@ const ContactMeScreen = () => {
               }
             }
 
-            // api.handlePostRequest(payload, '/contact-submit'); 
+            const result = await api.handlePostRequest(payload, 'contact-submit');
+
+            setIsVisible(false); 
+             
+            if (!result.error) {
+                const { message } = result.data;
+                setContactBanner(message); 
+            } else {
+                setContactBanner(result.error); 
+            }
+
         } else {
-            console.log('Not Valid Email'); 
+            setContactBanner('Not Valid Email....'); 
         }
     };
 
@@ -97,11 +111,15 @@ const ContactMeScreen = () => {
               className='contact-screen-body-message-textarea'
               maxLength={200}
             />
-            <button 
-              type="submit" 
-              className='contact-screen-body-submit-button'>
-                Submit
-            </button>
+            <div className='contact-screen-body-contact-banner'>{contactBanner}</div>
+            {
+              isVisible && 
+              <button 
+                type="submit" 
+                className='contact-screen-body-submit-button'>
+                  Submit
+              </button>
+            }
             </form>
       </div>
     ); 

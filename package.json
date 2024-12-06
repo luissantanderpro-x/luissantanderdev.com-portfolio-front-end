@@ -20,6 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test-build": "serve -s build", 
+    "compress": "tar -czvf build.tar.gz build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
