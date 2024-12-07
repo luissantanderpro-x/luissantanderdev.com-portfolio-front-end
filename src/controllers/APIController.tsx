@@ -1,9 +1,10 @@
+import { SERVER_API_URLS } from "../config/serverApiUrls";
 
 class APIController {
     private readonly url: string; 
 
     public constructor() {
-        this.url = 'https://luissantanderdev.com/api/'
+        this.url = SERVER_API_URLS.api_url;
     }
 
     public async handlePostRequest(payload: any, endpoint: string) {

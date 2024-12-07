@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; 
 import APIController from '../controllers/APIController';
+import { SERVER_API_URLS } from '../config/serverApiUrls';
 
 // MARK: Component 
 
@@ -52,7 +53,7 @@ const ContactMeScreen = () => {
               }
             }
 
-            const result = await api.handlePostRequest(payload, 'contact-submit');
+            const result = await api.handlePostRequest(payload, SERVER_API_URLS.contact_submit);
 
             setIsVisible(false); 
              

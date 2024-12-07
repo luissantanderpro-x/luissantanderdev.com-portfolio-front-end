@@ -1,4 +1,4 @@
-// Color Pallet 
+// MARK: Color Pallet 
 // ============================================
 
 $color-red: red;
@@ -23,6 +23,14 @@ $color-cyan: cyan;
 //       color: red; // Style for iPhones
 //     }
 //   }
+
+// MARK: Mixins Funcs 
+
+@mixin iphone_se {
+    @media screen and (min-width: 375px) and (max-height: 668px) {
+        @content;
+    }
+}
 
 // MARK: - Fixed Properties 
 
@@ -56,6 +64,7 @@ body {
 #root {
     @extend .center-flex; 
     height: 100%;
+
 }
 
 .container {
@@ -68,6 +77,13 @@ body {
     border-radius: 10px;
     border: 1px solid $color-cyan;
 
+
+    // iPhone SE (1st Generation)
+    @include iphone_se {
+        width: 350px;
+    }
+
+
     // Iphone 14 Pro Max
     @media (min-width: 430px) and (max-height: 933px) {
         width: 400px;
@@ -78,6 +94,7 @@ body {
         width: 550px;
         height: 70%;
     }
+
 
     @media (min-width: 751px) and (max-width: 1600px) {
         width: 600px;
@@ -102,6 +119,7 @@ body {
     border-top-right-radius: 10px;
     background-color: black;
     border: 1px solid $color-cyan;
+    height: 80%;
 
     &-buttons {
         @extend .center-flex;
@@ -183,6 +201,14 @@ button:hover {
 
 // MARK: - Top Grid 
 
+
+@include iphone_se() {
+    .top-grid > :nth-child(1) {
+        display: none;
+    }
+}
+
+
 .top-grid {
     display: grid;
     grid-template-columns: 30% 70%;
@@ -194,6 +220,68 @@ button:hover {
     overflow: hidden;
     height: 100%;
     width: 100%;
+
+    @include iphone_se() {
+        grid-template-columns: 100%;
+    }
+
+    &-item {
+        background-color: #111;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        padding: 10px;                    
+        overflow: hidden;
+        border-radius: 10px;
+
+        &-picture {
+            position: relative;
+            border: 1px solid $color-cyan;
+            border-radius: 10px;
+            
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+    
+            &-base-image {
+                width: 100%;
+                height: 100%;
+            }
+    
+            &-overlay-image {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 100%;
+                transform: translate(-50%, -50%); /* Center the overlay */
+                animation: fadeOscillator 3s infinite;
+            }
+        }
+
+        &-about-me {
+            background-color: #000;
+            border: 1px solid $color-cyan;
+            border-radius: 10px;
+            padding: 1px;
+            height: 100%;
+            overflow: hidden;
+
+            &-header {
+                font-size: 0.8rem;
+            }
+
+            &-body {
+                height: 95%;
+                div {
+                    font-size: 0.6rem;
+                }
+            }
+        }
+    }
+
+    &-item:hover {
+        background-color: #333;
+        box-shadow: 0 0 10px #00ffcc;
+    }
 }
 
 .top-grid-home {
@@ -214,68 +302,14 @@ button:hover {
         div {
             font-size: 0.8rem;
             text-align: center;
-        }
-    }
-}
 
-.top-grid-item {
-    background-color: #111;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    padding: 10px;                    
-    overflow: hidden;
-    border-radius: 10px;
-
-    &-about-me {
-        background-color: #000;
-        border: 1px solid $color-cyan;
-        border-radius: 10px;
-        padding: 1px;
-        height: 100%;
-        overflow: hidden;
-
-        &-header {
-            font-size: 0.8rem;
-        }
-
-        &-body {
-            // background-color: red;
-            height: 95%;
-            div {
-                font-size: 0.6rem;
+            @include iphone_se() {
+                font-size: 0.7rem;
             }
         }
     }
 }
 
-.top-grid-item:hover {
-    background-color: #333;
-    box-shadow: 0 0 10px #00ffcc;
-}
-
-.picture {
-    position: relative;
-    border: 1px solid $color-cyan;
-    border-radius: 10px;
-    
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    &-base-image {
-        width: 100%;
-        height: 100%;
-    }
-
-    &-overlay-image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%); /* Center the overlay */
-        animation: fadeOscillator 3s infinite;
-    }
-}
 
 // MARK: TP: Projects
 
@@ -428,30 +462,35 @@ button:hover {
 
     &-header {
         font-size: 0.8rem;
+        border-bottom: 1px solid white;
     }
 
-    &-body {
+    &-body {        
         height: 100%;
         width: 100%;
-        
-        @extend .center-flex;
-        gap: 0.6rem;
 
-        button {
-            @extend .center-flex;
-            font-size: 0.8rem;
-            background-color: transparent;
-            color: white;
-            border: 1px solid $color-cyan;
-            border-radius: 10px;
+        div:nth-child(1) {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 50%;
+        }
 
-            :hover {
-                background-color: red;
+        div {
+            button {
+                background-color: transparent;
+                color: $color-cyan;
+                border: 1px solid $color-cyan;
+
+            }
+
+            button:hover {
+                background-color:#00ffcc;
+                color: #000;
             }
         }
     }
 }
-
 
 .project-image {
     background-size: cover;
@@ -485,6 +524,10 @@ button:hover {
     scroll-behavior: smooth;
 
     height: 100%;
+
+    @include iphone_se() {
+        grid-template-columns: none;
+    }
 }
 
 .menu-grid-item {
@@ -520,15 +563,15 @@ button:hover {
     overflow-y: auto;
     text-align: left;
     scroll-behavior: smooth;
-}
 
-.command-shell-item {
-    display: grid;
-    grid-gap: 1px;
-    grid-template-columns: 25% 75%;
-
-    div {
-        font-size: 0.55rem;
+    &-item {
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: 25% 75%;
+    
+        div {
+            font-size: 0.55rem;
+        }
     }
 }
 

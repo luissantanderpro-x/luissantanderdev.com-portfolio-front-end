@@ -1,14 +1,16 @@
 import React from 'react'; 
+import { PROFESSIONAL_LINKS } from '../config/webUrls';
+
 
 const ProfessionalLinksScreen = () => {
 
-    const handleRedirect = () => {
-      window.location.href = 'https://www.linkedin.com/in/luissantanderpro/'; 
+    const handleRedirect = (url: string) => {
+      window.location.href = url; 
     }
 
-    const handleResumeDownload = () => {
+    const handleResumeDownload = (url: string) => {
         const link = document.createElement('a');
-        link.href = 'https://drive.google.com/uc?export=download&id=1jHBZ2CK-SdIg5xGcW-fP-TSyC919-sP3';
+        link.href = url;
         link.download = 'Luis Santander Resume.pdf'; // Filename for the downloaded file
         document.body.appendChild(link);
         link.click();
@@ -19,8 +21,13 @@ const ProfessionalLinksScreen = () => {
       <div className='professional-links-screen'>
           <div className='professional-links-screen-header'>Professional Links</div>
           <div className='professional-links-screen-body'>
-            <button onClick={handleResumeDownload}>📑Resume</button>
-            <button onClick={handleRedirect}>👔LinkedIn</button>
+            <div>
+                <button onClick={() => handleResumeDownload(PROFESSIONAL_LINKS.google_resume)}>📑Resume</button>
+                <button onClick={() => handleRedirect(PROFESSIONAL_LINKS.linkedin)}>👔LinkedIn</button>
+            </div>
+            <div>
+                <button onClick={() => handleRedirect(PROFESSIONAL_LINKS.github)}>😼GitHub</button>
+            </div>
           </div>
       </div>
     ); 

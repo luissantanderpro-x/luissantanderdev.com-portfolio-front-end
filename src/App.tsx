@@ -122,9 +122,9 @@ const App = () => {
 
         <div className="top-grid">
             <div className="top-grid-item">
-                <div className="picture">
-                    <img className='picture-base-image' src={nimrod_image} alt="codec screen"/>
-                    <img className='picture-overlay-image' src={tv_static_image} alt="static screen" />
+                <div className="top-grid-item-picture">
+                    <img className='top-grid-item-picture-base-image' src={nimrod_image} alt="codec screen"/>
+                    <img className='top-grid-item-picture-overlay-image' src={tv_static_image} alt="static screen" />
                 </div> 
             </div>
             <div className="top-grid-item">
