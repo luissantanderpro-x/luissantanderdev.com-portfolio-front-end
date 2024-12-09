@@ -8,12 +8,12 @@ RUN useradd -m luissantanderdev
 
 WORKDIR /home/luissantanderdev
 
-USER luissantanderdev
-
 COPY . .
 
 # Update and install necessary packages
 RUN apt-get update && apt-get install -y \
+    nodejs \
+    npm \ 
     bash \
     curl \
     vim \
@@ -21,7 +21,11 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8080
+RUN npm install
+
+USER luissantanderdev
+
+EXPOSE 3000
 
 # Set the default command
 CMD ["bash"]
