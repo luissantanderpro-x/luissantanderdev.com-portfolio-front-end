@@ -516,13 +516,11 @@ button:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px; 
-
+    padding: 10px;
     background-color: #000;
     border-radius: 10px;
-
     overflow: scroll;
     scroll-behavior: smooth;
-
     height: 100%;
 
     @include iphone_se() {

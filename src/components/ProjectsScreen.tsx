@@ -99,13 +99,18 @@ const ProjectComponent = () => {
     );
 }
 
-const ProjectsScreen = () => {
+interface ChildProps {
+    test_function: (name: string) => void; 
+}
+
+const ProjectsScreen: React.FC<ChildProps> = ({ test_function }) => {
     return (
       <div className='top-grid-projects'>
         <div className='top-grid-projects-header'>Projects</div>
         <div className='top-grid-projects-body'>
             <ProjectComponent /> 
         </div>
+        <button onClick={() => test_function('I am the child')} /> 
       </div>
     ); 
 }; 

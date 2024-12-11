@@ -19,17 +19,11 @@ interface ComponentsDictionary {
   [key: string]: ReactNode; 
 }
 
-const menuComponents: ComponentsDictionary = {
-  home: <HomeScreen />, 
-  projects: <ProjectsScreen />,
-  about_me: <AboutMeScreen />,
-  contact_me: <ContactMeScreen />,
-  professional_links: <ProfessionalLinksScreen />
-}; 
-
 const App = () => {
 
   // MARK: App State 
+  const [screen, setScreen] = useState<ReactNode>(<HomeScreen />);
+  const [inputField, setInputField] = useState<string>('')
 
   const [currentScreen, setCurrentScreen] = useState(() => {
       return sessionStorage.getItem('currentScreen') || 'home'; 
@@ -46,9 +40,9 @@ const App = () => {
       ]
   }); 
 
-  const [screen, setScreen] = useState(menuComponents[currentScreen]);
-  const [inputField, setInputField] = useState<string>('')
- 
+
+  // MARK: App Functions 
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputField(e.target.value) 
   }
@@ -65,10 +59,24 @@ const App = () => {
       sessionStorage.setItem('currentScreen', currentScreen); 
   }, [currentScreen, shellPrompts]); 
 
-  const handleClick = (e: any) => {
-    setCurrentScreen(e.target.id)
-    setScreen(menuComponents[e.target.id])
+  // TODO: Trigger the Command Shell When Clicking Elements throughout the Site 
+  //       From Child Elements within menu components. 
+  const test_function = (msg: string) => {
+      console.log('Parent Function: ', msg); 
+  }
 
+  const menuComponents: ComponentsDictionary = {
+    home: <HomeScreen />, 
+    projects: <ProjectsScreen test_function={test_function}/>,
+    about_me: <AboutMeScreen />,
+    contact_me: <ContactMeScreen />,
+    professional_links: <ProfessionalLinksScreen />
+  }; 
+
+  const handleClick = (e: any) => {
+    setCurrentScreen(e.target.id); 
+    setScreen(menuComponents[e.target.id]);
+    
     let response = ''; 
 
     switch (e.target.id) {
@@ -100,7 +108,7 @@ const App = () => {
 
     setShellPrompts([...shellPrompts, projects_shell]);
   }; 
-
+  
   return (
     <div className="container">
 

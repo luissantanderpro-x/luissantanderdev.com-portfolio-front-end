@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; 
 import APIController from '../controllers/APIController';
 import { SERVER_API_URLS } from '../config/serverApiUrls';
+import ValidatorUtils from '../utils/ValidatorUtils';
 
 // MARK: Component 
 
@@ -10,16 +11,9 @@ interface FormData {
     message: string
 }
 
-function isValidEmail(email: string) {
-  const emailRegex = /^[^\s@]+@[a-zA-Z]+\.[a-zA-Z]+$/;
-  return emailRegex.test(email);
-}
-
 const ContactMeScreen = () => {
-
     const [isVisible, setIsVisible] = useState(true); 
     const [contactBanner, setContactBanner] = useState(''); 
-
     const [formData, setFormData] = useState<FormData>({
       name: '',
       email: '', 
@@ -40,11 +34,8 @@ const ContactMeScreen = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
 
-        if (isValidEmail(formData.email)) {
-            console.log('submitted to server');
-
+        if (ValidatorUtils.isValidEmail(formData.email)) {
             const api = new APIController(); 
-
             const payload = {
               data: {
                 name: formData.name, 

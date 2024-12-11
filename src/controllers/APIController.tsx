@@ -4,12 +4,12 @@ class APIController {
     private readonly url: string; 
 
     public constructor() {
-        this.url = SERVER_API_URLS.api_url;
+        this.url = SERVER_API_URLS.api_url; 
     }
 
     public async handlePostRequest(payload: any, endpoint: string) {
         const post_url = this.url + endpoint; 
-
+ 
         let result: any = {}; 
 
         try {
@@ -37,6 +37,5 @@ class APIController {
         return result; 
     }
 }
-
 
 export default APIController; 
