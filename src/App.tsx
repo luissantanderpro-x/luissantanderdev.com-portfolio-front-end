@@ -1,17 +1,20 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import nimrod_image from './images/nimrod.jpg'; 
 import tv_static_image from './images/tv_static.jpg';
 
-// MARK: - Components 
+// MARK: - Screens
 
-import HomeScreen from './components/HomeScreen';
-import ProjectsScreen from './components/ProjectsScreen';
-import AboutMeScreen from './components/AboutMeScreen';
-import CommandShellComponent from './components/CommandShell';
-import ContactMeScreen from './components/ContactMeScreen';
-import ProfessionalLinksScreen from './components/ProfessionalLinksScreen';
-import SlowPrint from './effects/SlowPrint';
+import HomeScreen from './screens/HomeScreen';
+import ProjectsScreen from './screens/ProjectsScreen';
+import AboutMeScreen from './screens/AboutMeScreen';
+import ContactMeScreen from './screens/ContactMeScreen';
+import ProfessionalLinksScreen from './screens/ProfessionalLinksScreen';
+
+// MARK: Components 
+
+import CommandShellComponent from './components/CommandShellComponent';
+import SlowPrint from './components/SlowPrint';
 
 // MARK: - App 
 
@@ -19,27 +22,60 @@ interface ComponentsDictionary {
   [key: string]: ReactNode; 
 }
 
+interface CommandShellPromptComponentInterface {
+    caller_name: string,
+    caller_message: string 
+}
+
+const InteractiveShellResponses: Record<string, string> = {
+    home_screen_body: 'I see you pressed the home section...'
+}
+
+const CommandShellPromptComponent: React.FC<CommandShellPromptComponentInterface> = ({ caller_name, caller_message }) => {
+    return (
+      <div className='command-shell-item' key='0'>
+          <div>{caller_name}: </div>
+          <SlowPrint msg={caller_message} interval={400} />
+      </div>
+    ); 
+}
+
+// MARK: Factory Function
+ 
+function createComponentFactory(type: 'shell_prompt', props: any) {
+    switch(type) {
+        case 'shell_prompt': 
+        return <CommandShellPromptComponent key={props.shell_key} {...props} />
+    }
+}
+
 const App = () => {
 
+  const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>(() => {
+    return [
+        createComponentFactory('shell_prompt', {
+          shell_key: '0', 
+          caller_name: 'nimrod.ai', 
+          caller_message: 'hi there'}) 
+    ]; 
+  }); 
+
+  const onClickSectionChatBotResponseTrigger = useCallback((id: string) => {
+      setShellPrompts((prevShellPrompts) => [...prevShellPrompts, createComponentFactory('shell_prompt', {
+        shell_key: '' + prevShellPrompts.length,
+        caller_name: 'nimrod.ai', 
+        caller_message: InteractiveShellResponses[id]
+      })])
+  }, []); 
+
   // MARK: App State 
-  const [screen, setScreen] = useState<ReactNode>(<HomeScreen />);
+
+  const [screen, setScreen] = useState<ReactNode>(<HomeScreen onClickBody={onClickSectionChatBotResponseTrigger}/>);
   const [inputField, setInputField] = useState<string>('')
 
   const [currentScreen, setCurrentScreen] = useState(() => {
       return sessionStorage.getItem('currentScreen') || 'home'; 
   });
-
-  const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>(() => {
-      return [
-          (  
-            <div className='command-shell-item' key='0'>
-              <div>nimrod.ai: </div>
-              <SlowPrint msg={'hi there'} interval={400} />
-              </div>
-          )
-      ]
-  }); 
-
 
   // MARK: App Functions 
 
@@ -66,7 +102,7 @@ const App = () => {
   }
 
   const menuComponents: ComponentsDictionary = {
-    home: <HomeScreen />, 
+    home: <HomeScreen onClickBody={onClickSectionChatBotResponseTrigger}/>, 
     projects: <ProjectsScreen test_function={test_function}/>,
     about_me: <AboutMeScreen />,
     contact_me: <ContactMeScreen />,
@@ -74,39 +110,36 @@ const App = () => {
   }; 
 
   const handleClick = (e: any) => {
-    setCurrentScreen(e.target.id); 
-    setScreen(menuComponents[e.target.id]);
-    
-    let response = ''; 
+      setCurrentScreen(e.target.id); 
+      setScreen(menuComponents[e.target.id]);
+      
+      let response = ''; 
 
-    switch (e.target.id) {
-      case 'home': 
-        response = 'Back to the home screen';
-        break; 
-      case 'projects':
-        response = 'you chose projects I see. do you have a question about one of them in particular?';
-        break; 
-      case 'about_me':
-        response = 'you chose about me so what would you like to learn about Luis Santander?'; 
-        break; 
-      case 'contact_me':
-        response = 'you wish to contact Luis please fill out the form.'; 
-        break; 
-      case 'professional_links':
-        response = "Here are Luis's resume and Linkedln."
-        break;
-      default:
-        response = '';  
-    }; 
+      switch (e.target.id) {
+        case 'home': 
+          response = 'Back to the home screen';
+          break; 
+        case 'projects':
+          response = 'you chose projects I see. do you have a question about one of them in particular?';
+          break; 
+        case 'about_me':
+          response = 'you chose about me so what would you like to learn about Luis Santander?'; 
+          break; 
+        case 'contact_me':
+          response = 'you wish to contact Luis please fill out the form.'; 
+          break; 
+        case 'professional_links':
+          response = "Here are Luis's resume and Linkedln."
+          break;
+        default:
+          response = '';  
+      }; 
 
-    const projects_shell = (
-      <div className='command-shell-item' key={'' + shellPrompts.length}>
-        <div>nimrod.ai: </div>
-        <SlowPrint msg={response} interval={400}/>
-      </div>
-    );
-
-    setShellPrompts([...shellPrompts, projects_shell]);
+      setShellPrompts([...shellPrompts, createComponentFactory('shell_prompt', {
+          shell_key: '' + shellPrompts.length,
+          caller_name: 'nimrod.ai',
+          caller_message: response
+      })]);
   }; 
   
   return (
@@ -162,7 +195,7 @@ const App = () => {
                 </div>
             </div>
             <div className="grid-item">
-              <CommandShellComponent shellPrompts={shellPrompts}/> 
+                <CommandShellComponent shellPrompts={shellPrompts}/> 
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 import React from 'react'; 
 
-import SlowPrint from '../effects/SlowPrint';
+import SlowPrint from '../components/SlowPrint';
 
 const AboutMeScreen = () => {
     const messages = [

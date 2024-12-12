@@ -8,8 +8,9 @@
 # testing
 /coverage
 
-# production
+# production files 
 /build
+build.tar.gz 
 
 # misc
 .DS_Store

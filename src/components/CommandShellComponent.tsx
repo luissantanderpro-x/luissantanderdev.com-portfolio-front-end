@@ -5,7 +5,6 @@ interface CommandShellProps {
 }; 
 
 const CommandShellComponent: React.FC<CommandShellProps> = React.memo(({shellPrompts}) => {
-    
     const shellRef = useRef<HTMLDivElement>(null); 
 
     useEffect(() => {
@@ -32,11 +31,10 @@ const CommandShellComponent: React.FC<CommandShellProps> = React.memo(({shellPro
     }, [shellPrompts]);
   
     return (
-      <div className="command-shell" ref={shellRef}>
-          {shellPrompts}
-      </div>
+        <div className="command-shell" ref={shellRef}>
+            {shellPrompts}
+        </div>
     ); 
+});
 
-  });
-
-  export default CommandShellComponent; 
+export default CommandShellComponent; 

@@ -1,11 +1,17 @@
 import React from 'react'; 
 
-import SlowPrint from '../effects/SlowPrint';
+import SlowPrint from '../components/SlowPrint';
 
-const HomeScreen = () => {
+type HomeScreenProps = {
+    onClickBody: (id: string) => void; 
+}; 
+
+const HomeScreen: React.FC<HomeScreenProps> = ({ onClickBody }) => {
+
+  
     const words = 'Hi there my name is Luis Santander and welcome to my portfolio site.';
     return (
-      <div className='top-grid-home'>
+      <div className='top-grid-home' onClick={() => onClickBody('home_screen_body')}>
         <div className='top-grid-home-header'>Home</div>
         <div className='top-grid-home-body'>
           <SlowPrint msg={words} interval={300}/>
@@ -13,6 +19,6 @@ const HomeScreen = () => {
       </div>
     );
 
-  }
+}; 
 
-  export default HomeScreen
+export default HomeScreen
