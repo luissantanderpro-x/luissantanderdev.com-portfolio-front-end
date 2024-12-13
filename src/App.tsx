@@ -14,7 +14,7 @@ import ProfessionalLinksScreen from './screens/ProfessionalLinksScreen';
 // MARK: Components 
 
 import CommandShellComponent from './components/CommandShellComponent';
-import SlowPrint from './components/SlowPrint';
+import { ComponentFactory } from './utils';
 
 // MARK: - App 
 
@@ -22,50 +22,37 @@ interface ComponentsDictionary {
   [key: string]: ReactNode; 
 }
 
-interface CommandShellPromptComponentInterface {
-    caller_name: string,
-    caller_message: string 
-}
+
 
 const InteractiveShellResponses: Record<string, string> = {
     home_screen_body: 'I see you pressed the home section...'
-}
-
-const CommandShellPromptComponent: React.FC<CommandShellPromptComponentInterface> = ({ caller_name, caller_message }) => {
-    return (
-      <div className='command-shell-item' key='0'>
-          <div>{caller_name}: </div>
-          <SlowPrint msg={caller_message} interval={400} />
-      </div>
-    ); 
-}
-
-// MARK: Factory Function
- 
-function createComponentFactory(type: 'shell_prompt', props: any) {
-    switch(type) {
-        case 'shell_prompt': 
-        return <CommandShellPromptComponent key={props.shell_key} {...props} />
-    }
 }
 
 const App = () => {
 
   const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>(() => {
     return [
-        createComponentFactory('shell_prompt', {
-          shell_key: '0', 
-          caller_name: 'nimrod.ai', 
-          caller_message: 'hi there'}) 
+      ComponentFactory.createComponent('shell_prompt', {
+          shell_key: '0',
+          caller_name: 'nimrod.ai',
+          caller_message: 'hi there' 
+      })
     ]; 
   }); 
 
   const onClickSectionChatBotResponseTrigger = useCallback((id: string) => {
-      setShellPrompts((prevShellPrompts) => [...prevShellPrompts, createComponentFactory('shell_prompt', {
-        shell_key: '' + prevShellPrompts.length,
-        caller_name: 'nimrod.ai', 
-        caller_message: InteractiveShellResponses[id]
-      })])
+
+      setShellPrompts((prevShellPrompts) => {
+
+          const newShellPromptComponent = ComponentFactory.createComponent('shell_prompt', {
+              shell_key: '' + prevShellPrompts.length,
+              caller_name: 'nimrod.ai',
+              caller_message: InteractiveShellResponses[id]
+          })
+
+          return [...prevShellPrompts, newShellPromptComponent]; 
+      });
+
   }, []); 
 
   // MARK: App State 
@@ -135,11 +122,13 @@ const App = () => {
           response = '';  
       }; 
 
-      setShellPrompts([...shellPrompts, createComponentFactory('shell_prompt', {
+      const shellPromptComponent = ComponentFactory.createComponent('shell_prompt', {
           shell_key: '' + shellPrompts.length,
           caller_name: 'nimrod.ai',
           caller_message: response
-      })]);
+      }); 
+
+      setShellPrompts([...shellPrompts, shellPromptComponent]);
   }; 
   
   return (

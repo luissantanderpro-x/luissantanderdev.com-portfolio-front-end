@@ -1,6 +1,8 @@
 import React from 'react'; 
 
-import SlowPrint from '../components/SlowPrint';
+// MARK: Components
+
+import { SlowPrintComponent } from '../components';
 
 const AboutMeScreen = () => {
     const messages = [
@@ -16,7 +18,7 @@ const AboutMeScreen = () => {
     const messageOutput = messages.map((message, index) => {
         return (
           <div key={index}>
-            <SlowPrint msg={message} interval={300}/>
+            <SlowPrintComponent msg={message} interval={300}/>
             <h1>--------------</h1>
           </div>
         ); 

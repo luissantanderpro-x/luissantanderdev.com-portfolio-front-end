@@ -7,13 +7,8 @@ import project3 from '../assets/gifs/project-gifs/prism-project.gif';
 import project4 from '../assets/gifs/project-gifs/loanpro-project.gif'; 
 import project5 from '../assets/gifs/project-gifs/verisk-project.gif'; 
 
-interface ProjectPrompts {
-  url: string; 
-  imageURL: string; 
-  projectName: string;
-  projectDescription: string;
-  projectTooling: string; 
-}; 
+// MARK: Interfaces 
+import { ProjectPrompts } from '../types';
 
 const Project: React.FC<ProjectPrompts> = ({url, imageURL, projectName, projectDescription, projectTooling}) => {
 

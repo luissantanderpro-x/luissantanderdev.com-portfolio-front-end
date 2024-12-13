@@ -3,21 +3,19 @@ import APIController from '../controllers/APIController';
 import { SERVER_API_URLS } from '../config/serverApiUrls';
 import ValidatorUtils from '../utils/ValidatorUtils';
 
-// MARK: Component 
+// MARK: Types 
 
-interface FormData {
-    name: string, 
-    email: string, 
-    message: string
-}
+import { ContactMeFormDataTypes } from '../types';
+
+// MARK: Component 
 
 const ContactMeScreen = () => {
     const [isVisible, setIsVisible] = useState(true); 
     const [contactBanner, setContactBanner] = useState(''); 
-    const [formData, setFormData] = useState<FormData>({
-      name: '',
-      email: '', 
-      message: ''
+    const [formData, setFormData] = useState<ContactMeFormDataTypes>({
+        name: '',
+        email: '', 
+        message: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

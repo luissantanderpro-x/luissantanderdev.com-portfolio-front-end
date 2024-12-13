@@ -7,7 +7,7 @@ interface SlowPrintProps {
 
 // MARK: - Slow Print 
 
-const SlowPrint: React.FC<SlowPrintProps> = ({msg, interval}) => {
+export const SlowPrintComponent: React.FC<SlowPrintProps> = ({msg, interval}) => {
     const [displayWords, setDisplayedWords] = useState('')
     const [wordIndex, setWordIndex] = useState(0) 
 
@@ -28,6 +28,4 @@ const SlowPrint: React.FC<SlowPrintProps> = ({msg, interval}) => {
     }, [wordIndex, words, interval]);
 
     return <div>{displayWords}</div> 
-}
-
-export default SlowPrint; 
+};

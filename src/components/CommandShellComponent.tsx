@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react'; 
 
-interface CommandShellProps {
-    shellPrompts: JSX.Element[];
-}; 
+import { CommandShellProps } from '../types';
 
 const CommandShellComponent: React.FC<CommandShellProps> = React.memo(({shellPrompts}) => {
     const shellRef = useRef<HTMLDivElement>(null); 
