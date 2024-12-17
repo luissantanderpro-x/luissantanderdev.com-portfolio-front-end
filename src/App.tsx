@@ -16,19 +16,49 @@ import ProfessionalLinksScreen from './screens/ProfessionalLinksScreen';
 import CommandShellComponent from './components/CommandShellComponent';
 import { ComponentFactory } from './utils';
 
+// MARK: Types Imports 
+
+import { ComponentsDictionary } from './types';
+import APIController from './controllers/APIController';
+import { WEB_URLS } from './config/webUrls';
+import { SERVER_API_URLS } from './config/serverApiUrls';
+
 // MARK: - App 
-
-interface ComponentsDictionary {
-  [key: string]: ReactNode; 
-}
-
-
 
 const InteractiveShellResponses: Record<string, string> = {
     home_screen_body: 'I see you pressed the home section...'
 }
 
 const App = () => {
+
+  useEffect(() => {
+    const api = new APIController();
+
+    const getClientAPIAddress = async () => {
+        const result = await api.handleGetRequest(WEB_URLS.ipify_url); 
+
+        if (result.error) {
+          console.log(result);
+        } else {
+          const payload = {
+            data: {
+              ip_address: result.ip
+            }
+          }
+  
+          const server_result = await api.handlePostRequest(
+            payload,
+            SERVER_API_URLS.client_analytics
+          ); 
+  
+          console.log(server_result); 
+        }
+    }
+
+    getClientAPIAddress(); 
+
+  }, []); 
+
 
   const [shellPrompts, setShellPrompts] = useState<JSX.Element[]>(() => {
     return [

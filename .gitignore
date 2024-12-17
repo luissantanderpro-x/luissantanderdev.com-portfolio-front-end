@@ -12,6 +12,10 @@
 /build
 build.tar.gz 
 
+# Development Environment 
+.env
+/.env
+
 # misc
 .DS_Store
 .env.local

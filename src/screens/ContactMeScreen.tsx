@@ -27,8 +27,6 @@ const ContactMeScreen = () => {
         }); 
     };
 
-    // TODO: Work on Handling Form Submission. 
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
 

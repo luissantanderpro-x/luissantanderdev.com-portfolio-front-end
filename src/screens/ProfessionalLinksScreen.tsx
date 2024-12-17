@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { PROFESSIONAL_LINKS } from '../config/webUrls';
+import { WEB_URLS } from '../config/webUrls';
 
 
 const ProfessionalLinksScreen = () => {
@@ -22,11 +22,11 @@ const ProfessionalLinksScreen = () => {
           <div className='professional-links-screen-header'>Professional Links</div>
           <div className='professional-links-screen-body'>
             <div>
-                <button onClick={() => handleResumeDownload(PROFESSIONAL_LINKS.google_resume)}>📑Resume</button>
-                <button onClick={() => handleRedirect(PROFESSIONAL_LINKS.linkedin)}>👔LinkedIn</button>
+                <button onClick={() => handleResumeDownload(WEB_URLS.google_resume)}>📑Resume</button>
+                <button onClick={() => handleRedirect(WEB_URLS.linkedin)}>👔LinkedIn</button>
             </div>
             <div>
-                <button onClick={() => handleRedirect(PROFESSIONAL_LINKS.github)}>😼GitHub</button>
+                <button onClick={() => handleRedirect(WEB_URLS.github)}>😼GitHub</button>
             </div>
           </div>
       </div>
