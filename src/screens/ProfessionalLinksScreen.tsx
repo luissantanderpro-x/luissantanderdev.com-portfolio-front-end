@@ -8,21 +8,21 @@ const ProfessionalLinksScreen = () => {
       window.location.href = url; 
     }
 
-    const handleResumeDownload = (url: string) => {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'Luis Santander Resume.pdf'; // Filename for the downloaded file
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
+    // NOTE: This code here is if I want to Enable Resume Download URL 
+    // const handleResumeDownload = (url: string) => {
+    //     const link = document.createElement('a');
+    //     link.href = url;
+    //     link.download = 'Luis Santander Resume.pdf'; // Filename for the downloaded file
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     document.body.removeChild(link);
+    // }
 
     return (
       <div className='professional-links-screen'>
           <div className='professional-links-screen-header'>Professional Links</div>
           <div className='professional-links-screen-body'>
             <div>
-                <button onClick={() => handleResumeDownload(WEB_URLS.google_resume)}>📑Resume</button>
                 <button onClick={() => handleRedirect(WEB_URLS.linkedin)}>👔LinkedIn</button>
             </div>
             <div>

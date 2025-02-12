@@ -209,7 +209,7 @@ const App = () => {
                   </div>
                   <div className='menu-grid-item'>
                       <div className='menu-grid-item-icon'>👔</div>
-                      <button id='professional_links' onClick={(e) => handleClick(e)}>Resume</button>
+                      <button id='professional_links' onClick={(e) => handleClick(e)}>Pro Links</button>
                   </div>
                 </div>
             </div>

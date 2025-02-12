@@ -10,7 +10,7 @@
 
 # production files 
 /build
-build.tar.gz 
+# build.tar.gz 
 
 # Development Environment 
 .env
