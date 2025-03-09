@@ -105,7 +105,6 @@ const ProjectsScreen: React.FC<ChildProps> = ({ test_function }) => {
         <div className='top-grid-projects-body'>
             <ProjectComponent /> 
         </div>
-        <button onClick={() => test_function('I am the child')} /> 
       </div>
     ); 
 }; 
